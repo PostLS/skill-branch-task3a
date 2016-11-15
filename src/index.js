@@ -34,19 +34,19 @@ fetch(pcUrl)
 			if(id1 in pc) {
 				res.send(JSON.stringify(pc[id1], ""));
 			} else {
-				res.send("Not Found");
+				res.status(404).send("Not Found");
 			}
 		} else if(id2 !== undefined && id3 === undefined) {
 			if(id2 in pc[id1]) {
 				res.send(JSON.stringify(pc[id1][id2], ""));
 			} else {
-				res.send("Not Found");
+				res.status(404).send("Not Found");
 			}
 		} else if(id3 !== undefined) {
 			if(id3 in pc[id1][id2]) {
 				res.send(JSON.stringify(pc[id1][id2][id3], ""));
 			} else {
-				res.send("Not Found");
+				res.status(404).send("Not Found");
 			}
 		}
 	});
