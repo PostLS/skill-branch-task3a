@@ -30,20 +30,20 @@ fetch(pcUrl)
 				volumes[key] += "B";
 			}
 			res.send(JSON.stringify(volumes, ""));
-		} else if('id1' in req.params && id2 == undefined) {
+		} else if(id1 !== undefined && id2 == undefined) {
 			if(id1 in pc) {
 				res.send(JSON.stringify(pc[id1], ""));
 			} else {
 				res.status(404).send("Not Found");
 			}
 		} else if(id2 !== undefined && id3 === undefined) {
-			if(id2 in pc[id1]) {
+			if(id1 in pc && id2 in pc[id1]) {
 				res.send(JSON.stringify(pc[id1][id2], ""));
 			} else {
 				res.status(404).send("Not Found");
 			}
 		} else if(id3 !== undefined) {
-			if(id3 in pc[id1][id2]) {
+			if(id1 in pc && id2 in pc[id1] && id3 in pc[id1][id2]) {
 				res.send(JSON.stringify(pc[id1][id2][id3], ""));
 			} else {
 				res.status(404).send("Not Found");
