@@ -18,12 +18,15 @@ fetch(pcUrl)
 			res.send(pc);
 		} else if(id1 === 'volumes') {
 			const volumes = {};
-			for(var i = 0; i < pc.hdd.lenght; i++) {
-				if(volumes[pc.hdd[i].volume] === false) {
+			for(var i = 0; i < pc.hdd.length; i++) {
+				if(!(pc.hdd[i].volume in volumes)) {
 					volumes[pc.hdd[i].volume] = pc.hdd[i].size;
 				} else if(pc.hdd[i].volume in volumes) {
-					volumes[pc.hdd[i].volume].size += pc.hdd[i].size;
+					volumes[pc.hdd[i].volume] += pc.hdd[i].size;
 				}
+			}
+			for(var key in volumes) {
+				volumes[key] += "B";
 			}
 			res.send(JSON.stringify(volumes, ""));
 		} else if('id1' in req.params && id2 == undefined) {
