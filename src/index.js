@@ -11,9 +11,10 @@ let pc = {};
 fetch(pcUrl)
   .then(async (res) => {
   	pc = await res.json();
-  		app.get("/task3a/:id1?/:id2?", (req, res) => {
+  		app.get("/task3a/:id1?/:id2?/:id3?", (req, res) => {
 		const id1 = req.params.id1;
 		const id2 = req.params.id2;
+		const id3 = req.params.id3;
 		if(id1 === undefined) {
 			res.send(pc);
 		} else if(id1 === 'volumes') {
@@ -35,9 +36,15 @@ fetch(pcUrl)
 			} else {
 				res.send("Not Found");
 			}
-		} else if(id2 !== undefined) {
+		} else if(id2 !== undefined && id3 === undefined) {
 			if(id2 in pc[id1]) {
 				res.send(JSON.stringify(pc[id1][id2], ""));
+			} else {
+				res.send("Not Found");
+			}
+		} else if(id3 !== undefined) {
+			if(id3 in pc[id1][id2]) {
+				res.send(JSON.stringify(pc[id1][id2][id3], ""));
 			} else {
 				res.send("Not Found");
 			}
